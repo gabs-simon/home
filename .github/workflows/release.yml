@@ -1,4 +1,4 @@
-name: Release
+name: Semantic Release
 on: push
 jobs:
   test:
@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "16"
-      - name: Release
+      - name: Semantic Release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
