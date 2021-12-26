@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Window from '../components/terminal/Window'
+import Window from '../components/terminal/TerminalWindow'
 
 export default function Home() {
   return (<>
