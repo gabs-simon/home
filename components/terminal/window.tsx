@@ -1,44 +1,42 @@
-import React from 'react'
+import { FC, useState, ReactElement } from 'react'
+import { runCommand as rc } from '../../utils/command'
 
-const Header: React.FC = () => {
-  return (<div className="h-10 w-full bg-neutral-150 rounded-t-lg dark:bg-slate-700 px-2 grid dark:text-white text-slate-900 ">
-    <h1 className="text-sm w-full font-bold place-self-center text-center">Title</h1>
-  </div>)
-}
+import Header from './Header'
+import History from './History'
+import Prompt from './Prompt'
 
-const History: React.FC = () => {
-  return (<div className="w-full h-full px-6 py-8 grow"></div>)
-}
+const Window: FC = () => {
+  const h: ReactElement[] = []
+  const [history, setHistory] = useState(h)
+  const [input, setInput] = useState('')
 
-const Location: React.FC = () => {
-  return (<div className="text-md font-bold px-2 text-green-200">~/</div>)
-}
+  const pushToHistory = (c: ReactElement | ReactElement[]) => {
+    if (Array.isArray(c)) {
+      setHistory([...history, ...c])
+    } else {
+      setHistory([...history, c])
+    }
+  }
+  const emptyPrompt = () => setInput('')
 
-const Shell: React.FC = () => {
-  return (<div className="text-md font-bold px-0 text-blue-300">$</div>)
-}
+  const runCommand = rc(emptyPrompt, pushToHistory)
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      runCommand(input)
+    }
+  }
 
-const Command: React.FC = () => {
-  return (<div className="w-full grow px-1">Text</div>)
-}
-
-const Input: React.FC = () => {
-  return (<div className="h-10 w-full bg-neutral-200 dark:bg-slate-700 rounded-b-lg px-2 py-2 grid">
-    <div className="w-full place-self-center text-slate-900 dark:text-slate-100 text-xs flex flex-row">
-      <Location />
-      <Shell />
-      <Command />
-    </div>
-  </div>)
-}
-
-const Window: React.FC = () => {
-  // Renders the header of a mac-style terminal window
   return (
-    <div id="window" className={`window h-full bg-neutral-50 dark:bg-neutral-900 rounded-lg flex flex-col`}>
-      <Header />
-      <History />
-      <Input />
+    <div
+      id="window"
+      className={`window h-full bg-neutral-50 dark:bg-neutral-900 rounded-lg flex flex-col`}
+      onKeyPress={onKeyDown}
+      onClick={() => document.getElementById('prompt-input').focus()}>
+      <Header title="Header" />
+      <History>
+        {history.map((h, i) => <div key={`terminal-history-${i}`}>{h}</div>)}
+      </History>
+      <Prompt input={input} setInput={setInput} />
     </div>
   )
 }

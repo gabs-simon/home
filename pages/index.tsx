@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Window from '../components/terminal/window'
+import Window from '../components/terminal/Window'
 
 export default function Home() {
   return (<>
@@ -10,7 +9,7 @@ export default function Home() {
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <div className="bg-gradient-to-br from-green-300 via-blue-500 to-purple-600 w-full h-screen flex flex-col py-8 px-6">
-      <div className="grow h-full"> 
+      <div className="grow h-full">
         <Window />
       </div>
     </div>
