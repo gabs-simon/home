@@ -16,6 +16,7 @@ COPY components ./components
 COPY pages ./pages
 COPY public ./public
 COPY styles ./styles
+COPY utils ./utils
 
 RUN yarn build
 
