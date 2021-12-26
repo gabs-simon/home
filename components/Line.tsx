@@ -5,10 +5,12 @@ type LineProps = {
   small?: boolean
 }
 export const Line: FC<LineProps> = ({ className, children, small }) => {
-  let cl = [(className) + ("w-full") + (small ? "h-5" : "h-7")].join(' ')
-
+  let cl = [
+    className,
+    small ? "h-5" : "h-7",
+  ].join(' ')
   return (
-    <div className={cl}>
+    <div className={"w-full text-slate-800 dark:text-slate-100" + cl}>
       {children}
     </div>
   )
