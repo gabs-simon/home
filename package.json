@@ -1,7 +1,7 @@
 {
   "name": "home",
   "description": "My home page",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
