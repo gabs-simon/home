@@ -30,5 +30,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gabs-simon/home.git"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   }
 }
